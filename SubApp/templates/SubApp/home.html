@@ -198,7 +198,7 @@
                 <tr>
                   <td style="font-size: 16px; color: #333;">{{ i.username }}</td>
                   <td style="font-size: 16px; color: #333;">{{ i.name.upper }}</td>
-                  <td style="font-size: 16px; color: #333;">{{ i.userType }}</td>
+                  <td style="font-size: 16px; color: #333;">{{ i.userTypeName }}</td>
                   <td style="font-size: 16px; color: #333;">
                     <form action="/viewUser/" method="POST">
                       {% csrf_token %}
@@ -238,7 +238,7 @@
                   <td style="font-size: 16px; color: #333;">{{ i.timestamp }}</td>
                   <td style="font-size: 16px; color: #333;">{{ i.transactionType }}</td>
                   <td style="font-size: 16px; color: #333;">{{ i.ownerRelation.name }}</td>
-                  <td style="font-size: 16px; color: #333;">{{ i.product.productType }} - {{ i.product.productId }}</td>
+                  <td style="font-size: 16px; color: #333;">{{ i.product.productTypeName }} - {{ i.product.productId }}</td>
                   <td style="font-size: 16px; color: #333;">{{ i.location.lat }}, {{ i.location.lng }}</td>
                   <td style="font-size: 16px; color: #333;">
                     <form action="/viewBlock/" method="POST">

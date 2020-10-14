@@ -40,18 +40,18 @@ def fetchData():
         for block in chain["chain"]:
             temp = json.loads(block)
             if int(temp['transactionType'])==1:
-                temp['transactionType'] = "New Block"
+                temp['transactionTypeName'] = "New Block"
             elif int(temp['transactionType'])==2:
-                temp['transactionType'] = "Location Update"
+                temp['transactionTypeName'] = "Location Update"
             else:
-                temp['transactionType'] = "Transfered Record"
+                temp['transactionTypeName'] = "Transfered Record"
 
             if int(temp['product']['productType'])==1:
-                temp['product']['productType'] = "PPE Kit"
+                temp['product']['productTypeName'] = "PPE Kit"
             elif int(temp['product']['productType'])==2:
-                temp['product']['productType'] = "Mask"
+                temp['product']['productTypeName'] = "Mask"
             else:
-                temp['product']['productType'] = "Sanitizer"
+                temp['product']['productTypeName'] = "Sanitizer"
 
             transactions.append(temp)
             locData.append(["BLOCK_"+str(ttp), temp['location']['lat'], temp['location']['lng']])
@@ -61,11 +61,11 @@ def fetchData():
         for tuser in chain["users"]:
             temp = json.loads(tuser)
             if int(temp['userType'])==1:
-                temp['userType'] = "Manufacturer"
+                temp['userTypeName'] = "Manufacturer"
             elif int(temp['userType'])==2:
-                temp['userType'] = "Supplier"
+                temp['userTypeName'] = "Supplier"
             elif int(temp['userType'])==3:
-                temp['userType'] = "Seller"
+                temp['userTypeName'] = "Seller"
             else:
                 temp['userType'] = "Buyer"
             allusers.append(temp)

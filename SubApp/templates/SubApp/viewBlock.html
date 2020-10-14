@@ -54,7 +54,7 @@
             {% for i in transactions %}
               <tr>
                 <td style="font-size: 16px; color: #333;">{{ i.timestamp }}</td>
-                <td style="font-size: 16px; color: #333;">{{ i.transactionType }}</td>
+                <td style="font-size: 16px; color: #333;">{{ i.transactionTypeName }}</td>
                 <td style="font-size: 16px; color: #333;">{{ i.ownerRelation.name }}</td>
                 <td style="font-size: 16px; color: #333;">{{ i.location.lat }}, {{ i.location.lng }}</td>
               </tr>
