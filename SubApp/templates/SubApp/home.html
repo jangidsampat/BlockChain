@@ -1,0 +1,271 @@
+{% extends 'SubApp/index.html' %}
+{% load static %}
+
+{% block title %}Home | Python CP B-21{% endblock %}
+{% block navbar %}
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto w-100 justify-content-end">
+          <li class="nav-item">
+            <a class="nav-link page-scroll" href="#home">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link page-scroll" href=".about">About Project</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link page-scroll" href=".users">Users</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link page-scroll" href=".Transactions">Transactions</a>
+          </li>
+          {% if hasAuth %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'addBlock' %}">Add Block</a>
+          </li>
+          {% endif %}
+          <li class="nav-item">
+            <a class="nav-link page-scroll" href=".contact">Plot</a>
+          </li>
+        </ul>
+      </div>
+{% endblock %}
+
+
+{% block header %}
+<!-- Content Just After Navbar -->
+      <div class="container">
+        <div class="row space-100" style="height: 100vh;">
+          <div class="col-lg-7 col-md-12 col-xs-12">
+            <div class="contents">
+              <h2 style="margin-top: 90px;" class="head-title">Welcome, <br>To the World of WebData !!!</h2>
+              <p>Herein we have created an Exotic Web App in order to display our Web development Skills <br>including FrontEnd and BackEnd, and Data Analysis Logic</p>
+              <div class="header-button">
+                {% if userPresent %}
+                <a href="{% url 'profile' %}" style="width : 200px; margin-top: 60px;" class="btn btn-border-filled">Profile</a>
+                <a href="{% url 'logout' %}" style="width : 200px; margin-top: 60px;" class="btn btn-border">Log Out</a>
+                {% else %}
+                <a href="{% url 'signup' %}" style="width : 200px; margin-top: 60px;" class="btn btn-border-filled">Sign Up</a>
+                <a href="{% url 'login' %}" style="width : 200px; margin-top: 60px;" class="btn btn-border">Log In</a>
+                {% endif %}
+                {% if messages %}
+                    {% for message in messages %}
+                      <div class="jumbotron alert alert-{{ message.tags }} fade show mt-5" role="alert">
+                        {{ message }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                    {% endfor %}
+                {% endif %}
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-5 col-md-12 col-xs-12">
+            <div class="intro-img" style="margin-left: -20px; margin-top: -20px;">
+              <figure>
+                <embed type="image/svg+xml" src="{% static 'svg/home_logo.svg' %}" />
+              </figure>
+            </div>
+          </div>
+        </div>
+      </div>
+<!-- Header Section End -->
+{% endblock %}
+
+
+{% block body %}
+
+    <!-- features Section Start -->
+    <div id="app-features" class="section about">
+      <div class="container">
+        <div class="section-header">
+          <h3 class="btn btn-subtitle wow fadeInDown" data-wow-delay="0.2s">About Project</h3>
+          <h2 class="section-title wow fadeIn" data-wow-delay="0.2s">Amazing Features</h2>
+        </div>
+        <div class="row">
+          <div class="col-lg-4 col-md-12 col-xs-12">
+            <div class="content-left text-right">
+              <div class="box-item left">
+                <span class="icon">
+                  <i class="lni-customer"></i>
+                </span>
+                <div class="text">
+                  <h4>User Friendly</h4>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing typesting industry text.</p>
+                </div>
+              </div>
+              <div class="box-item left">
+                <span class="icon">
+                  <i class="lni-dashboard"></i>
+                </span>
+                <div class="text">
+                  <h4>Super Fast Speed</h4>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing typesting industry text.</p>
+                </div>
+              </div>
+              <div class="box-item left">
+                <span class="icon">
+                  <i class="lni-headphone-alt"></i>
+                </span>
+                <div class="text">
+                  <h4>24/7 Support</h4>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing typesting industry text.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-12 col-xs-12">
+            <div class="show-box">
+              <img src="{% static 'img/features/app.svg' %}" alt="">
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-12 col-xs-12">
+            <div class="content-right text-left">
+              <div class="box-item right">
+                <span class="icon">
+                  <i class="lni-shield"></i>
+                </span>
+                <div class="text">
+                  <h4>Secure</h4>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing typesting industry text.</p>
+                </div>
+              </div>
+              <div class="box-item right">
+                <span class="icon">
+                  <i class="lni-star-filled"></i>
+                </span>
+                <div class="text">
+                  <h4>Awesome Rating</h4>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing typesting industry text.</p>
+                </div>
+              </div>
+              <div class="box-item right">
+                <span class="icon">
+                  <i class="lni-bar-chart"></i>
+                </span>
+                <div class="text">
+                  <h4>Dynamic Plotting</h4>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing typesting industry text.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- features Section End -->
+
+    <!-- Start Reference Section -->
+    <section class="video-promo section">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 col-sm-12">
+              <div class="video-promo-content text-center">
+                <a href="https://lineicons.com" class="video-popup"><i class="lni-lineicons size-lg"></i></a>
+                <a class="video-popup"><i class="lni-youtube size-lg"></i></a>
+                <a class="video-popup"><i class="lni-whatsapp size-lg"></i></i></a>
+                <a href="https://getbootstrap.com/" class="video-popup"><i class="lni-bootstrap size-lg"></i></i></a>
+                <a href="https://www.google.com/chrome/" class="video-popup"><i class="lni-chrome size-lg"></i></i></a>
+                <a class="video-popup"><i class="lni-git size-lg"></i></a>
+                <a class="video-popup"><i class="lni-stackoverflow size-lg"></i></a>
+                <a class="video-popup"><i class="lni-library size-lg"></i></a>
+                <a href="https://www.google.com/drive/" class="video-popup"><i class="lni-google size-lg"></i></a>
+                <h2 class="mt-3 wow zoomIn" data-wow-duration="1000ms" data-wow-delay="100ms">Resources Used</h2>
+              </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End Reference Section -->
+
+    <!-- Registered users section Start -->
+    <section id="pricing" class="section users mb-5">
+      <div class="container">
+        <div class="section-header">
+          <p class="btn btn-subtitle wow fadeInDown" data-wow-delay="0.2s">Users</p>
+          <h2 class="section-title">Registered Users</h2>
+          <table class="table mt-5" style="margin-bottom: -80px;">
+            <thead>
+              <tr>
+                <th scope="col" style="font-size: 16px; color: #919191;">UserName</th>
+                <th scope="col" style="font-size: 16px; color: #919191;">Name</th>
+                <th scope="col" style="font-size: 16px; color: #919191;">User Type</th>
+                <th scope="col" style="font-size: 16px; color: #919191;">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for i in users %}
+                <tr>
+                  <td style="font-size: 16px; color: #333;">{{ i.username }}</td>
+                  <td style="font-size: 16px; color: #333;">{{ i.name.upper }}</td>
+                  <td style="font-size: 16px; color: #333;">{{ i.userType }}</td>
+                  <td style="font-size: 16px; color: #333;">
+                    <form action="/viewUser/" method="POST">
+                      {% csrf_token %}
+                      <input type="hidden" name="username" value="{{ i.username }}"/>
+                      <button class="btn btn-common" type="submit"> ----> </button>
+                    </form>
+                  </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+    <!-- Users section End -->
+
+    <!-- Recent Transactions section Start -->
+    <section id="pricing" class="section Transactions mb-5">
+      <div class="container">
+        <div class="section-header">
+          <p class="btn btn-subtitle wow fadeInDown" data-wow-delay="0.2s">Transactions</p>
+          <h2 class="section-title">Recent Transactions</h2>
+          <table class="table mt-5" style="margin-bottom: -80px;">
+            <thead>
+              <tr>
+                <th scope="col" style="font-size: 16px; color: #919191;">Time Stamp</th>
+                <th scope="col" style="font-size: 16px; color: #919191;">Transaction Type</th>
+                <th scope="col" style="font-size: 16px; color: #919191;">Owner Username</th>
+                <th scope="col" style="font-size: 16px; color: #919191;">Product</th>
+                <th scope="col" style="font-size: 16px; color: #919191;">Location</th>
+                <th scope="col" style="font-size: 16px; color: #919191;">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for i in transactions %}
+                <tr>
+                  <td style="font-size: 16px; color: #333;">{{ i.timestamp }}</td>
+                  <td style="font-size: 16px; color: #333;">{{ i.transactionType }}</td>
+                  <td style="font-size: 16px; color: #333;">{{ i.ownerRelation.name }}</td>
+                  <td style="font-size: 16px; color: #333;">{{ i.product.productType }} - {{ i.product.productId }}</td>
+                  <td style="font-size: 16px; color: #333;">{{ i.location.lat }}, {{ i.location.lng }}</td>
+                  <td style="font-size: 16px; color: #333;">
+                    <form action="/viewBlock/" method="POST">
+                      {% csrf_token %}
+                      <input type="hidden" name="productId" value="{{ i.product.productId }}"/>
+                      <button class="btn btn-common" type="submit"> ----> </button>
+                    </form>
+                  </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+    <!-- Recent Transactions section End -->
+
+    <!-- Map Section Start -->
+    <section id="map-area" class="contact">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12 padding-0">
+            <div id="map", style="width: 100%; height: 450px;"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Map Section End -->
+
+{% endblock %}

@@ -1,0 +1,88 @@
+{% extends 'SubApp/index.html' %}
+{% load static %}
+{% block title %}Log In | Python CP B21{% endblock %}
+
+{% block navbar %}
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto w-100 justify-content-end">
+          <li class="nav-item">
+            <a class="nav-link page-scroll" href="{% url 'home' %}">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link page-scroll" href="{% url 'logout' %}">Log Out</a>
+          </li>
+        </ul>
+      </div>
+{% endblock %}
+
+{% block header %}
+<!-- Content Just After Navbar -->
+      <div class="container" style="height:400px;">
+        <div class="row space-100">
+          <div class="col-lg-7 col-md-12 col-xs-12">
+            <div class="contents">
+              <h2 style="margin-top: 60px;" class="head-title">Welcome, {{ user.name.upper }} !!!</h2>
+            </div>
+          </div>
+          <div class="col-lg-5 col-md-12 col-xs-12">
+            <div class="intro-img" style="margin-top: -60px; margin-left: 100px; width: 250px;">
+              <img src="{% static 'img/default.png' %} " alt="Default Profile Pic">
+            </div>
+          </div>
+        </div>
+      </div>
+<!-- Header Section End -->
+{% endblock %}
+
+{% block body %}
+
+<div class="container mb-5">
+  <div class="mb-3 mt-5" style="margin-left:265px;">
+    <form>
+      <div class="form-row">
+        <div class="col-md-4 mb-3">
+          <label class="ml-4">Full Name</label>
+          <input type="text" class="form-control" value="{{ user.name }}" readonly>
+        </div>
+        <div class="col-md-4 mb-3">
+            <label class="ml-4">Username</label>
+            <input type="text" class="form-control" value="{{ user.username }}" readonly>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-md-8 mb-3">
+          <label class="ml-4">User Type</label>
+          <input type="email" class="form-control" value="{{ user.userType }}" readonly>
+        </div>
+      </div>
+
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-primary" style="width:300px; margin-left:130px;" data-toggle="modal" data-target="#exampleModal">
+        Make Changes
+      </button>
+
+      <!-- Modal -->
+      <div class="modal fade" style="z-index: 10000;" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" style="font-size: 20px;" id="exampleModalLabel">Oops...</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              The Backend for Making Changes to your Profile Page is not Ready yet.
+              It's Coming Soon !!!
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</div>
+{% endblock %}

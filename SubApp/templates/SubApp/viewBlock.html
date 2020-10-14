@@ -1,0 +1,159 @@
+{% extends 'SubApp/index.html' %}
+{% load static %}
+
+{% block title %}Change This{% endblock %}
+{% block navbar %}
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto w-100 justify-content-end">
+          <li class="nav-item">
+            <a class="nav-link page-scroll" href="{% url 'home' %}">Home</a>
+          </li>
+        </ul>
+      </div>
+{% endblock %}
+
+
+{% block header %}
+<!-- Content Just After Navbar -->
+<div class="container" style="height:400px;">
+  <div class="row space-100">
+    <div class="col-lg-7 col-md-12 col-xs-12">
+      <div class="contents">
+        <h2 style="margin-top: 60px;" class="head-title ml-3">{{ tblock.product.productId }}</h2>
+      </div>
+    </div>
+    <div class="col-lg-5 col-md-12 col-xs-12">
+      <div class="intro-img">
+          <img style="margin-top: -60px; width:250px; margin-left:80px;" src="{% static 'svg/login.png' %}" alt="Login">
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Header Section End -->
+{% endblock %}
+
+
+{% block body %}
+
+  <!-- Recent Transactions section Start -->
+  <section id="pricing" class="section Transactions mb-5">
+    <div class="container">
+      <div class="section-header">
+        <p class="btn btn-subtitle wow fadeInDown" data-wow-delay="0.2s">Transactions</p>
+        <h2 class="section-title">Recent Transactions with This Product</h2>
+        <table class="table mt-5" style="margin-bottom: -80px;">
+          <thead>
+            <tr>
+              <th scope="col" style="font-size: 16px; color: #919191;">Time Stamp</th>
+              <th scope="col" style="font-size: 16px; color: #919191;">Transaction Type</th>
+              <th scope="col" style="font-size: 16px; color: #919191;">Owner Username</th>
+              <th scope="col" style="font-size: 16px; color: #919191;">Location</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for i in transactions %}
+              <tr>
+                <td style="font-size: 16px; color: #333;">{{ i.timestamp }}</td>
+                <td style="font-size: 16px; color: #333;">{{ i.transactionType }}</td>
+                <td style="font-size: 16px; color: #333;">{{ i.ownerRelation.name }}</td>
+                <td style="font-size: 16px; color: #333;">{{ i.location.lat }}, {{ i.location.lng }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+  <!-- Recent Transactions section End -->
+
+    <!-- Map Section Start -->
+    <section id="map-area" class="contact" style="z-index: 0;">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12 padding-0">
+            <div id="map", style="width: 100%; height: 550px; z-index: 0;"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Map Section End -->
+
+    <!-- Contact Section Start -->
+    <section id="contact" style="z-index: 200;">
+      <div class="contact-form">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="offset-top">
+              <div class="col-lg-12 col-md-12 col-xs-12">
+                <div class="contact-block wow fadeInUp" data-wow-delay="0.2s">
+                  <div class="section-header">
+                    <p class="btn btn-subtitle wow fadeInDown" data-wow-delay="0.2s">Update Block</p>
+                    <h2 class="section-title">Change Location</h2>
+                  </div>
+                  <form id="contactForm" action="/updateBlock/" method="POST">
+                    {% csrf_token %}
+                    <div class="row">
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <input type="text" class="form-control" id="latitude" name="latitude"  placeholder="Latitude" value="{{ tblock.location.lat }}" required>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <input type="text" class="form-control" id="longitude" name="longitude"  placeholder="Longitude" value="{{ tblock.location.lng }}" required>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="submit-button">
+                          <input type="hidden" name="productId" value="{{ tblock.product.productId }}"/>
+                          <input type="hidden" name="productType" value="{{ tblock.product.productType }}"/>
+                          {% if hasAuth %}
+                          <button class="btn btn-common" type="submit">Change Location</button>
+                          {% else %}
+                          <button class="btn btn-common" type="submit" disabled>Change Location</button>
+                          {% endif %}
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+                <div class="contact-block wow fadeInUp" data-wow-delay="0.2s">
+                  <div class="section-header">
+                    <h2 class="section-title">Transfer Block</h2>
+                  </div>
+                  <form id="contactForm" action="/transferBlock/" method="POST">
+                    {% csrf_token %}
+                    <div class="row">
+                      <div class="input-group mb-3 col-md-8">
+                        <select class="custom-select" name="username" id="inputGroupSelect01" required>
+                          <option selected>{{ tblock.ownerRelation.name }}</option>
+                          {% for i in users %}
+                            <option value="{{ i.username }}">{{ i.username }}</option>
+                          {% endfor %}
+                        </select>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="submit-button">
+                          <input type="hidden" name="productId" value="{{ tblock.product.productId }}"/>
+                          <input type="hidden" name="productType" value="{{ tblock.product.productType }}"/>
+                          <input type="hidden" name="latitude" value="{{ tblock.location.lat }}"/>
+                          <input type="hidden" name="longitude" value="{{ tblock.location.lng }}"/>
+                          {% if hasAuth %}
+                          <button class="btn btn-common" type="submit">Transfer Block</button>
+                          {% else %}
+                          <button class="btn btn-common" type="submit" disabled>Transfer Block</button>
+                          {% endif %}
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Contact Section End -->
+
+{% endblock %}

@@ -1,0 +1,75 @@
+{% extends 'SubApp/index.html' %}
+{% load static %}
+{% block title %}Add Block{% endblock %}
+
+{% block navbar %}
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto w-100 justify-content-end">
+          <li class="nav-item">
+            <a class="nav-link page-scroll" href="{% url 'home' %}">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link page-scroll" href="{% url 'logout' %}">Sign Out</a>
+          </li>
+        </ul>
+      </div>
+{% endblock %}
+
+{% block header %}
+<!-- Content Just After Navbar -->
+      <div class="container" style="height:400px;">
+        <div class="row space-100">
+          <div class="col-lg-7 col-md-12 col-xs-12">
+            <div class="contents">
+              <h2 style="margin-top: 60px;" class="head-title ml-3">Login To Your Account ...</h2>
+            </div>
+          </div>
+          <div class="col-lg-5 col-md-12 col-xs-12">
+            <div class="intro-img">
+                <img style="margin-top: -60px; width:250px; margin-left:80px;" src="{% static 'svg/login.png' %}" alt="Login">
+            </div>
+          </div>
+        </div>
+      </div>
+<!-- Header Section End -->
+{% endblock %}
+{% block body %}
+
+<div class="container mb-5">
+
+  {% if messages %}
+      {% for message in messages %}
+        <div class="jumbotron alert alert-{{ message.tags }} fade show mt-5" role="alert">
+          {{ message }}
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      {% endfor %}
+  {% endif %}
+
+  <div class="mb-3 mt-5" style="margin-left:265px;">
+    <form action="/addNewBlock/" method="POST">
+      {% csrf_token %}
+      <div class="input-group mb-3 col-md-8">
+        <select class="custom-select" name="productType" id="inputGroupSelect01" required autofocus>
+          <option selected>Choose...</option>
+          <option value="1">PPE Kit</option>
+          <option value="2">Mask</option>
+          <option value="3">Sanitizer</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <div class="col-md-4 mb-3">
+            <input type="text" class="form-control" id="latitude" name="latitude"  placeholder="Enter Latitude" required>
+        </div>
+        <div class="col-md-4 mb-3">
+          <input type="text" class="form-control" id="longitude" name="longitude"  placeholder="Enter Longitude" required>
+        </div>
+      </div>
+      <button class="btn btn-primary" style="width:300px; margin-left:130px;" type="submit">Add Block</button>
+    </form>
+</div>
+</div>
+
+{% endblock %}

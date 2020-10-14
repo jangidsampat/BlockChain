@@ -1,0 +1,95 @@
+{% extends 'SubApp/index.html' %}
+{% load static %}
+{% block title %}Sign Up | Python CP B21{% endblock %}
+
+{% block navbar %}
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto w-100 justify-content-end">
+          <li class="nav-item">
+            <a class="nav-link page-scroll" href="{% url 'home' %}">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link page-scroll" href="{% url 'login' %}">Log In</a>
+          </li>
+        </ul>
+      </div>
+{% endblock %}
+
+{% block header %}
+<!-- Content Just After Navbar -->
+      <div class="container" style="height:400px;">
+        <div class="row space-100">
+          <div class="col-lg-7 col-md-12 col-xs-12">
+            <div class="contents">
+              <h2 style="margin-top: 60px;" class="head-title">Sign Up for a New Account ...</h2>
+            </div>
+          </div>
+          <div class="col-lg-5 col-md-12 col-xs-12">
+            <div class="intro-img">
+              <img style="width:250px; margin-top: -50px; margin-left:100px;" src="{% static 'svg/usersignup.png' %}" alt="Signup">
+            </div>
+          </div>
+        </div>
+      </div>
+<!-- Header Section End -->
+{% endblock %}
+{% block body %}
+
+<div class="container mb-5">
+
+  {% if messages %}
+      {% for message in messages %}
+        <div class="jumbotron alert alert-{{ message.tags }} fade show mt-5" role="alert">
+          {{ message }}
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <ul>
+            <li>
+              May be because the Username was already Taken.
+            </li>
+            <li>
+              May be because the Passwords didn't match or were too Short and Similar to Username
+            </li>
+          </ul>
+        </div>
+      {% endfor %}
+  {% endif %}
+
+
+  <div class="mb-3 mt-5" style="margin-left:265px;">
+<form action="/signUpUser/" method="POST">
+  {% csrf_token %}
+  <div class="form-row">
+    <div class="col-md-4 mb-3">
+      <input type="text" class="form-control" id="first_name" name="first_name" placeholder="First name" autofocus required>
+      <div class="help-block with-errors"></div>
+    </div>
+    <div class="col-md-4 mb-3">
+      <input type="text" class="form-control" id="last_name" name="last_name"  placeholder="Last name">
+    </div>
+    <div class="col-md-8 mb-3">
+        <input type="text" class="form-control" id="username" name="username"  placeholder="Username" required>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="input-group mb-3 col-md-8">
+      <select class="custom-select" name="userType" id="inputGroupSelect01" required>
+        <option selected>Choose...</option>
+        <option value="1">Manufacturer</option>
+        <option value="2">Supplier</option>
+        <option value="3">Seller</option>
+        <option value="3">Buyer</option>
+      </select>
+    </div>
+    <div class="col-md-2"></div>
+    <div class="col-md-8 mb-3">
+      <input type="password" class="form-control" id="password" name="password"  placeholder="Password" required>
+    </div>
+  </div>
+  <button class="btn btn-primary" style="width:300px; margin-left:130px;" type="submit">Sign Up</button>
+</form>
+</div>
+<small style="margin-left:470px; margin-top:10px;">Have an Account?<a class="font-weight-lighter ml-2" style="font-size:13px;" href="{% url 'signup'%}">Log In ...</a></small></div>
+</div>
+{% endblock %}

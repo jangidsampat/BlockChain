@@ -1,0 +1,19 @@
+{% extends 'SubApp/index.html' %}
+{% load static %}
+{% block title %}Log In | Python CP B21{% endblock %}
+
+{% block navbar %}
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto w-100 justify-content-end">
+          <li class="nav-item">
+            <a class="nav-link page-scroll" href="{% url 'home' %}">Home</a>
+          </li>
+        </ul>
+      </div>
+{% endblock %}
+
+{% block header %}
+<!-- Content Just After Navbar -->
+<img src="{% static 'img/page_404.svg' %}" alt="Page Not Found">
+<!-- Header Section End -->
+{% endblock %}
